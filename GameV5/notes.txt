@@ -1,0 +1,171 @@
+handle damage events in engine
+in player
+if(inrange){
+  updateListeners(inv[0],"Damaged")
+}
+
+in enemy
+  evenName == "Damaged"
+  this.applydamage(component.damage)
+  
+in Component
+  
+  applydamage(damage){
+  damagetoapply = damage
+  if(item) damagetoapply -= 1
+  return damagetoapply
+  
+  }
+  
+
+
+  camera stuff
+
+  how to push objects
+  how to moveto a place
+
+  make enemies spawn certain distance from player
+
+  work out better inventory system
+
+let cookie  = document.cookie
+if(!cookie){
+  log(no cookie found)  
+}
+document.cookie = "1"
+else{
+  console.log(cookie)
+}
+
+  figure out weird xp bug
+
+  need to make all hud elements its own object
+
+
+  MOVEMENT NOTES
+    you need to make them move in a straight line, not move on both x and y at same speed
+    \
+     \
+      \
+       \
+       like this
+       _ _ _ _
+              |
+              |
+              |
+      not like this
+
+
+_______Spawner OBJECT__________
+Enemy Spawner Class
+  holds logic for when, where, and what to spawn
+  is not drawn
+  added directly to main scene
+_________________
+
+-maybe combine these two-
+_________________
+MainScene Controller Class
+  handles scene changes
+  handles xp spawning
+_________________
+
+
+
+_______Timer OBJECT__________
+Timer Component Class
+  keeps track of time remaining
+  keeps track of goal
+  is not drawn
+
+Timer Hud Component
+  draws the time on the hud
+____________________________
+
+
+_______XP OBJECT__________
+Xp component(amount)
+  creates xp object of specified amount
+  listens for player pickup
+
+xp Draw
+  circle from engine
+____________________________
+
+_______Player OBJECT_______
+player component
+  holds hitpoints, speed, xp, level, etc
+  handles movement
+  hit detection
+  holds manual weapon
+    set when you start game
+  hold auto weapon array
+    picked up on levelup
+    added to player object
+    player controller stores all of them in array
+  holds summon weapon array
+    picked up on levelup
+    added to playerobject
+    player controller stores all of them in array
+
+manual weapon component
+  weapon stats
+  aiming logic
+  on shoot, instatiate projectile object(this.transform,finalTransform)
+
+projectile object(startTransform,finalTransform)
+  projectile component(startTransfrom,finalTransform)
+    get start coordinates
+    get end coordinates
+    move to from start to end at specified speed
+    if it hits an enemy, send update directly to that enemy that it was hit
+    delete itself afterwards
+  draw component
+    draw projectile from engine assets or maybe custom assets like bombs, etc
+  
+
+  
+
+auto weapon component
+  weapon stats
+  
+summon weapon component
+  movement pattern, damage, range, firerate, etc
+
+
+  
+  
+
+
+player drawn
+  square from engine
+
+____________________________
+
+______Enemy OBJECT__________             have multiple types of enemy objects
+enemy component
+  handles movement
+  hit detection
+  holds hitpoints,speed,size,etc
+
+enemy drawn
+  draws enemy from engine assets
+
+
+____________________________IN Class__________-
+  3/22/2023
+text component in engine
+hitbox component
+
+  3/27/2023
+This week I experimented with mouse controls by
+adding a way for the player to shoot projectiles
+at enemies.
+The method I used to make the projectiles move
+is much better than how I was making things move previously
+so I updated my enemies to make use of the new method.
+I also used it to make picking up XP more fun.
+I also added enemy-enemy collisions so now they nudge
+eachother away instead of overlapping.
+
+
